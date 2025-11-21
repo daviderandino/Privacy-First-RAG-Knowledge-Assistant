@@ -18,7 +18,7 @@ const ChatInput = ({ onSendMessage, disabled }) => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && send()}
-          placeholder="Fai una domanda specifica..."
+          placeholder="Ask a specific question..."
           disabled={disabled}
         />
         <button onClick={send} disabled={disabled || !input.trim()}>

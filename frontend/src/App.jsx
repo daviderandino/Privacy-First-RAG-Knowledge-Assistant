@@ -12,22 +12,17 @@ function App() {
   const handleUploadSuccess = () => {
     setMessages(prev => [...prev, { 
       sender: 'bot', 
-      text: 'Documento analizzato con successo! Sono pronto a rispondere alle tue domande.' 
+      text: 'Document analyzed successfully! I\'m ready to answer your questions.' 
     }]);
   };
 
 const handleSendMessage = async (text) => {
-    // 1. Messaggio Utente immediato
     const userMsg = { sender: 'user', text };
     
-    // Aggiorniamo lo stato locale immediatamente
     const newMessages = [...messages, userMsg];
     setMessages(newMessages); 
     setIsLoading(true);
 
-    // 2. Prepariamo la History da inviare al backend
-    // Dobbiamo convertire il formato interno {sender: 'user'} 
-    // nel formato API {role: 'user', content: '...'}
     const historyPayload = messages.map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'assistant',
       content: msg.text
@@ -39,7 +34,7 @@ const handleSendMessage = async (text) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           question: text,
-          history: historyPayload // <--- ECCO LA NOVITÀ
+          history: historyPayload 
         }),
       });
 
@@ -52,7 +47,7 @@ const handleSendMessage = async (text) => {
       }]);
     } catch (error) {
       console.error(error);
-      setMessages(prev => [...prev, { sender: 'bot', text: 'Errore di connessione.' }]);
+      setMessages(prev => [...prev, { sender: 'bot', text: 'Network Error' }]);
     } finally {
       setIsLoading(false);
     }

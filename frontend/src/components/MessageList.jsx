@@ -13,7 +13,7 @@ const MessageList = ({ messages, isLoading }) => {
       {messages.length === 0 && (
         <div className="empty-state">
           <FaRobot size={50} color="#cbd5e1" />
-          <p>Carica un PDF e inizia a chattare con i tuoi dati.</p>
+          <p>Upload a PDF and start chatting with your data.</p>
         </div>
       )}
 
@@ -27,7 +27,7 @@ const MessageList = ({ messages, isLoading }) => {
             
             {msg.sources && msg.sources.length > 0 && (
               <div className="sources-container">
-                <div className="sources-title"><FaBookOpen /> Fonti rilevate:</div>
+                <div className="sources-title"><FaBookOpen /> Relevant sources:</div>
                 <div className="sources-list">
                   {msg.sources.map((src, i) => (
                     <span key={i} className="source-tag">{src}</span>

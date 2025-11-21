@@ -38,18 +38,18 @@ const FileUploader = ({ onUploadSuccess }) => {
     <div className="uploader-container">
       <label className={`upload-btn ${uploading ? 'disabled' : ''}`}>
         {uploading ? <FaSpinner className="spin" /> : <FaCloudUploadAlt />}
-        <span>{uploading ? 'Analisi in corso...' : 'Carica Documento PDF'}</span>
+        <span>{uploading ? 'Analysis in progress...' : 'Upload PDF'}</span>
         <input type="file" accept=".pdf" onChange={handleFileChange} disabled={uploading} hidden />
       </label>
 
       {status === 'success' && (
         <div className="status-badge success">
-          <FaCheckCircle /> Documento pronto
+          <FaCheckCircle /> Document ready
         </div>
       )}
       {status === 'error' && (
         <div className="status-badge error">
-          <FaExclamationCircle /> Errore caricamento
+          <FaExclamationCircle /> Load error
         </div>
       )}
     </div>
