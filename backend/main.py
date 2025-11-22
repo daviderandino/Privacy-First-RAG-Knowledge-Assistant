@@ -45,26 +45,52 @@ class ChatResponse(BaseModel):
     answer: str
     sources: List[str]
 
+@app.get("/documents")
+async def get_documents():
+    """Restituisce la lista dei PDF salvati nella Knowledge Base."""
+    if not os.path.exists("static"):
+        return []
+    
+    files = []
+    for filename in os.listdir("static"):
+        if filename.endswith(".pdf"):
+            files.append(filename)
+    return files
+
 @app.post("/upload")
 async def upload_document(file: UploadFile = File(...)):
     global vectorstore
-    temp_filename = f"temp_{file.filename}"
-    with open(temp_filename, "wb") as buffer:
+    
+    # Usa il nome originale del file (così ne puoi caricare diversi)
+    # Attenzione: pulisci il nome se ha spazi strani, ma per ora va bene così
+    file_path = f"static/{file.filename}"
+    
+    with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     
     try:
-        loader = PyPDFLoader(temp_filename)
+        loader = PyPDFLoader(file_path)
         data = loader.load()
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
         splits = text_splitter.split_documents(data)
         
         embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        vectorstore = Chroma.from_documents(documents=splits, embedding=embedding, persist_directory="./chroma_db")
-        return {"message": "File processed and memory updated!"}
+        
+        # Qui la magia: Chroma AGGIUNGE i documenti al DB esistente, non lo cancella
+        vectorstore = Chroma.from_documents(
+            documents=splits, 
+            embedding=embedding, 
+            persist_directory="./chroma_db"
+        )
+        
+        return {
+            "message": "Documento aggiunto alla Knowledge Base!", 
+            "filename": file.filename,
+            "pdf_url": f"http://localhost:8000/static/{file.filename}"
+        }
+        
     except Exception as e:
         return {"error": str(e)}
-    finally:
-        if os.path.exists(temp_filename): os.remove(temp_filename)
 
 @app.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):

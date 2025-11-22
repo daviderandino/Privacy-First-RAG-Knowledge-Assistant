@@ -58,7 +58,7 @@ Ollama installed and running (Download [here](https://ollama.com/download))
 Open a terminal and pull the model (this might take a few minutes depending on connection):
 ```bash
 ollama run llama3
-```bash
+```
 
 Setup Backend
 ```bash
