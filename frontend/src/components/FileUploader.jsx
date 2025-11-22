@@ -3,7 +3,7 @@ import { FaCloudUploadAlt, FaCheckCircle, FaExclamationCircle, FaSpinner } from 
 
 const FileUploader = ({ onUploadSuccess }) => {
   const [uploading, setUploading] = useState(false);
-  const [status, setStatus] = useState('idle'); // idle, success, error
+  const [status, setStatus] = useState('idle');
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];

@@ -1,5 +1,5 @@
 :root {
-  --primary: #4f46e5; /* Indigo */
+  --primary: #4f46e5; 
   --primary-hover: #4338ca;
   --bg: #f1f5f9;
   --white: #ffffff;
@@ -17,7 +17,7 @@ body {
   background-color: var(--bg);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--text-dark);
-  overflow: hidden; /* Evita scrollbar sulla pagina intera */
+  overflow: hidden; 
 }
 
 .app-layout {
@@ -29,15 +29,14 @@ body {
   background: var(--white);
 }
 
-/* HEADER */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.8rem 1.5rem; /* Leggermente più compatto */
+  padding: 0.8rem 1.5rem;
   border-bottom: 1px solid var(--gray-200);
   background: var(--white);
-  flex-shrink: 0; /* L'header non deve mai schiacciarsi */
+  flex-shrink: 0;
 }
 .logo-area { display: flex; align-items: center; gap: 10px; }
 .logo-icon { font-size: 1.5rem; color: var(--primary); }
@@ -45,50 +44,45 @@ body {
 .tag { font-size: 0.7rem; background: #e0e7ff; color: var(--primary); padding: 2px 6px; border-radius: 4px; margin-left: 8px; }
 .github-link { color: var(--text-light); text-decoration: none; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; }
 
-/* LAYOUT PRINCIPALE (Chat + PDF + Sidebar) */
 .main-content {
   flex: 1;
   display: flex;
-  flex-direction: row; /* Mette gli elementi uno accanto all'altro */
-  overflow: hidden;    /* Impedisce scroll indesiderati sul container */
+  flex-direction: row;
+  overflow: hidden;    
   height: 100%;
 }
 
-/* 1. CHAT COLUMN (Sinistra/Centro) */
 .chat-column {
-  flex: 1; /* Prende tutto lo spazio disponibile */
+  flex: 1; 
   display: flex;
   flex-direction: column;
-  min-width: 400px; /* Larghezza minima per non rompere la chat */
+  min-width: 400px; 
   border-right: 1px solid var(--gray-200);
-  order: 1; /* Ordine: Prima la chat */
+  order: 1; 
 }
 
-/* 2. PDF COLUMN (Centro - se presente) */
 .pdf-column {
-  flex: 1.5; /* Il PDF prende un po' più spazio della chat */
+  flex: 1.5; 
   background: #525659;
   padding: 20px;
   display: flex;
   justify-content: center;
   overflow-y: auto;
-  order: 2; /* Ordine: Poi il PDF */
+  order: 2; 
 }
 
-/* 3. SIDEBAR COLUMN (Destra) */
 .sidebar-column {
-  width: 280px; /* Larghezza fissa leggermente aumentata */
-  flex-shrink: 0; /* FONDAMENTALE: Impedisce alla sidebar di sparire/restringersi */
+  width: 280px;
+  flex-shrink: 0; 
   background-color: var(--sidebar-bg);
   color: var(--sidebar-text);
-  border-left: 1px solid var(--gray-200); /* Bordo a sinistra ora */
+  border-left: 1px solid var(--gray-200); 
   display: flex;
   flex-direction: column;
-  order: 3; /* Ordine: Alla fine (Destra) */
+  order: 3; 
   height: 100%;
 }
 
-/* ELEMENTI DELLA CHAT */
 .top-bar { padding: 1rem; background: #f8fafc; border-bottom: 1px solid var(--gray-200); }
 
 .chat-container {
@@ -102,7 +96,7 @@ body {
 .chat-window {
   flex: 1;
   padding: 1.5rem;
-  overflow-y: auto; /* Scroll solo dentro la chat */
+  overflow-y: auto; 
   background: var(--white);
   display: flex;
   flex-direction: column;
@@ -159,7 +153,6 @@ input::placeholder { color: #9ca3af; }
   cursor: pointer; display: flex; align-items: center; justify-content: center; 
 }
 
-/* STILE SIDEBAR (Lista Documenti) */
 .sidebar {
   padding: 20px;
   display: flex;
@@ -186,7 +179,7 @@ input::placeholder { color: #9ca3af; }
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-right: 5px; /* Spazio per scrollbar */
+  padding-right: 5px; 
 }
 
 .doc-item {
@@ -195,18 +188,16 @@ input::placeholder { color: #9ca3af; }
   gap: 10px;
   padding: 12px;
   border-radius: 6px;
-  cursor: default; /* <--- CAMBIATO DA 'pointer' A 'default' */
+  cursor: default; 
   transition: background 0.2s;
   font-size: 0.9rem;
   background: rgba(255,255,255,0.05);
   color: #cbd5e1;
 }
 
-/* Opzionale: Puoi lasciare l'hover per estetica, o rimuoverlo se preferisci */
 .doc-item:hover {
   background: rgba(255,255,255,0.1);
   color: #ffffff;
-  /* RIMOSSO: transform: translateX(2px); per renderlo più statico */
 }
 
 .doc-name {
@@ -224,7 +215,6 @@ input::placeholder { color: #9ca3af; }
   font-size: 0.8rem;
 }
 
-/* STILE VIEWER PDF */
 .pdf-viewer-container { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px; }
 .pdf-controls {
   background: white; padding: 8px 15px; border-radius: 20px;
@@ -233,7 +223,6 @@ input::placeholder { color: #9ca3af; }
 }
 .pdf-document-wrapper { box-shadow: 0 0 20px rgba(0,0,0,0.3); }
 
-/* FONTI */
 .sources-container { margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.05); }
 .sources-title { font-size: 0.75rem; font-weight: 700; opacity: 0.7; margin-bottom: 4px; }
 .sources-list { display: flex; flex-wrap: wrap; gap: 5px; }
@@ -244,7 +233,6 @@ input::placeholder { color: #9ca3af; }
 .source-tag.clickable { cursor: pointer; background: #e0e7ff; border-color: #c7d2fe; color: var(--primary); }
 .source-tag.clickable:hover { background: var(--primary); color: white; }
 
-/* ANIMAZIONI */
 .loading { display: flex; gap: 4px; padding: 15px !important; }
 .dot { width: 6px; height: 6px; background: #9ca3af; border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
 .dot:nth-child(1) { animation-delay: -0.32s; }

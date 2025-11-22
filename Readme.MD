@@ -13,6 +13,8 @@ This project implements a Full-Stack Retrieval-Augmented Generation (RAG) system
 
 The system leverages Ollama for local LLM inference (Llama 3), ChromaDB for vector storage, and a decoupled React + FastAPI architecture. It features conversational memory, allowing for context-aware follow-up questions, and provides precise source citations for every answer to mitigate hallucinations.
 
+![Application Preview](preview.png)
+
 ## ✨ Key Features
 
 1.  🔒 **Privacy-By-Design (Local Inference)**

@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react'; // Aggiungi useEffect
+import { useState, useEffect } from 'react'; 
 import Header from './components/Header';
 import FileUploader from './components/FileUploader';
 import MessageList from './components/MessageList';
 import ChatInput from './components/ChatInput';
-import Sidebar from './components/Sidebar'; // <--- NUOVO IMPORT
+import Sidebar from './components/Sidebar'; 
 import './App.css';
 
 function App() {
@@ -12,10 +12,8 @@ function App() {
   const [pdfUrl, setPdfUrl] = useState(null);
   const [activePage, setActivePage] = useState(1);
   
-  // NUOVO STATO: Lista documenti
   const [documents, setDocuments] = useState([]);
 
-  // 1. Carica documenti all'avvio
   useEffect(() => {
     fetchDocuments();
   }, []);
@@ -26,34 +24,28 @@ function App() {
       const data = await res.json();
       setDocuments(data);
     } catch (error) {
-      console.error("Errore fetch documenti:", error);
+      console.error("Fetch error:", error);
     }
   };
 
   const handleUploadSuccess = () => {
     setMessages(prev => [...prev, { 
       sender: 'bot', 
-      text: 'Documento aggiunto alla memoria! Ora so più cose.' 
+      text: 'Document added to memory! Now I know more things.' 
     }]);
-    // Aggiorna la lista nella sidebar
     fetchDocuments();
   };
 
-  // Quando clicchi un doc nella sidebar, lo apri nel viewer
   const handleSelectDoc = (filename) => {
     setPdfUrl(`http://localhost:8000/static/${filename}`);
   };
 
-  // ... handleSendMessage e handleSourceClick RESTANO UGUALI ...
-  // ... Copiali dal tuo codice precedente ...
   const handleSourceClick = (sourceString) => {
       const match = sourceString.match(/Pagina (\d+)/);
       if (match && match[1]) setActivePage(parseInt(match[1]));
   };
 
   const handleSendMessage = async (text) => {
-      // ... (Logica chat invariata) ...
-      // Assicurati di incollare la versione con la history che avevamo fatto prima!
       const userMsg = { sender: 'user', text };
       const newMessages = [...messages, userMsg];
       setMessages(newMessages); 
@@ -71,7 +63,7 @@ function App() {
         const data = await response.json();
         setMessages(prev => [...prev, { sender: 'bot', text: data.answer, sources: data.sources }]);
       } catch (error) {
-        setMessages(prev => [...prev, { sender: 'bot', text: 'Errore server.' }]);
+        setMessages(prev => [...prev, { sender: 'bot', text: 'Server error' }]);
       } finally {
         setIsLoading(false);
       }
@@ -84,12 +76,10 @@ function App() {
       
       <main className="main-content split-view">
         
-        {/* 1. SIDEBAR (Nuova Colonna Sinistra) */}
         <div className="sidebar-column">
           <Sidebar documents={documents} onSelectDoc={handleSelectDoc} />
         </div>
 
-        {/* 2. CHAT (Colonna Centrale) */}
         <div className="chat-column">
           <div className="top-bar">
             <FileUploader onUploadSuccess={handleUploadSuccess} />
@@ -105,7 +95,6 @@ function App() {
           </div>
         </div>
 
-        {/* 3. PDF (Colonna Destra) */}
         {pdfUrl && (
           <div className="pdf-column">
             <PdfViewer url={pdfUrl} targetPage={activePage} />
