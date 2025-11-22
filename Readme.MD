@@ -65,6 +65,10 @@ The recommended way to run the project. This will start the Backend, Frontend, a
 docker-compose up --build
 ```
 
+Frontend: http://localhost:5173
+
+Backend API: http://localhost:8000/docs
+
 ### Option B: Manual / Development Setup 🛠️
 
 Setup Backend
@@ -77,8 +81,6 @@ Setup Frontend
 cd frontend
 npm install
 ```
-
-### 🏃‍♂️ Usage
 Start the Backend Server:
 ```bash
 cd backend
