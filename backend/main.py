@@ -61,8 +61,6 @@ async def get_documents():
 async def upload_document(file: UploadFile = File(...)):
     global vectorstore
     
-    # Usa il nome originale del file (così ne puoi caricare diversi)
-    # Attenzione: pulisci il nome se ha spazi strani, ma per ora va bene così
     file_path = f"static/{file.filename}"
     
     with open(file_path, "wb") as buffer:
@@ -76,7 +74,6 @@ async def upload_document(file: UploadFile = File(...)):
         
         embedding = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
         
-        # Qui la magia: Chroma AGGIUNGE i documenti al DB esistente, non lo cancella
         vectorstore = Chroma.from_documents(
             documents=splits, 
             embedding=embedding, 
